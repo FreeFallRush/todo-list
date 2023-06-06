@@ -335,6 +335,7 @@ const domElements = (() => {
 
       cardsContainer.append(projectCard);
     });
+
     mainContent.textContent = "";
     pageHeader.append(pageTitle);
 
