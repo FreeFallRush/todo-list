@@ -1115,8 +1115,68 @@ const domElements = (() => {
     );
   };
 
+  const createEditProjectModal = () => {
+    const divTitle = createDiv("modal-title");
+    const modalTitle = createH2("modal-edit-project-title");
+    modalTitle.textContent = "Edit Project";
+
+    const divProjectTitleInput = createDiv("project-name-form");
+    const inputNameText = createH3("name-input-text");
+    inputNameText.textContent = "Project Name:";
+    const editProjectLabel = createLabel("edit-project");
+    const editProjectInput = createInput("edit-project", "text");
+    editProjectInput.setAttribute("data-edit-project-name", "");
+    editProjectInput.maxLength = 60;
+
+    const divProjectDescriptionInput = createDiv("project-description-form");
+    const inputDescriptionText = createH3("description-input-text");
+    inputDescriptionText.textContent = "Project Description:";
+    const editProjectDescriptionLabel = createLabel("edit-project-description");
+    const editProjectDescriptionInput = createTextArea(
+      "edit-project-description"
+    );
+    editProjectDescriptionInput.placeholder =
+      "Your choice if you want to add a short description to your project...";
+    editProjectDescriptionInput.setAttribute(
+      "data-edit-project-description",
+      ""
+    );
+    editProjectDescriptionInput.maxLength = 350;
+
+    const divColorInput = createDiv("project-color-form");
+    const inputColorText = createH3("color-input-text");
+    inputColorText.textContent = `Project's Color:`;
+    const editColorInputLabel = createLabel("project-color");
+    const editColorInput = createInput("project-color", "color");
+    editColorInput.setAttribute("data-edit-project-color", "");
+
+    formContainer.textContent = "";
+
+    divTitle.appendChild(modalTitle);
+    divProjectTitleInput.append(
+      inputNameText,
+      editProjectLabel,
+      editProjectInput
+    );
+    divProjectDescriptionInput.append(
+      inputDescriptionText,
+      editProjectDescriptionLabel,
+      editProjectDescriptionInput
+    );
+
+    divColorInput.append(inputColorText, editColorInputLabel, editColorInput);
+
+    formContainer.append(
+      divTitle,
+      divProjectTitleInput,
+      divProjectDescriptionInput,
+      divColorInput
+    );
+  };
+
   return {
     createAddProjectModal,
+    createEditProjectModal,
   };
 })();
 
