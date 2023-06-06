@@ -23,6 +23,7 @@ const handlers = (() => {
   closeModalBtn.addEventListener("click", (e) => {
     e.preventDefault();
     modalForm.removeEventListener("submit", addNewProjectEvent);
+    modalForm.removeEventListener("submit", editProjectEvent);
 
     modal.classList.add("hidden");
   });
@@ -31,6 +32,7 @@ const handlers = (() => {
     if (e.target === modal) {
       e.preventDefault();
       modalForm.removeEventListener("submit", addNewProjectEvent);
+      modalForm.removeEventListener("submit", editProjectEvent);
 
       modal.classList.add("hidden");
     }
