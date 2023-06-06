@@ -5210,6 +5210,9 @@ sidebarLinks.forEach((link) => {
       case "All ToDos":
         _js_dom_elements__WEBPACK_IMPORTED_MODULE_2__["default"].renderAllToDosPage();
         break;
+      case "Today":
+        _js_dom_elements__WEBPACK_IMPORTED_MODULE_2__["default"].renderTodayPage();
+        break;
     }
   });
 });
