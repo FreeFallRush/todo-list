@@ -1056,6 +1056,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _dom_elements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(21);
+/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(22);
+/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23);
+
+
+
 
 const handlers = (() => {
   const toggleSidebar = () => {
@@ -1116,7 +1121,7 @@ const handlers = (() => {
     const projectColor = colorInput.value;
 
     if (projectName !== "") {
-      projects.createNewProject(projectName, projectDescription, projectColor);
+      _project__WEBPACK_IMPORTED_MODULE_1__["default"].createNewProject(projectName, projectDescription, projectColor);
       _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].renderAllProjectsPage();
     }
     modalForm.removeEventListener("submit", addNewProjectEvent);
@@ -1139,6 +1144,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
+/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(23);
+/* harmony import */ var _handlers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(20);
+
+
+
+
 const domElements = (() => {
   //Main dom elements
   const createH2 = (className) => {
@@ -1456,17 +1468,17 @@ const domElements = (() => {
   const mainContainer = document.querySelector("#main-container");
 
   const renderAllProjectsPage = () => {
-    projects.saveProjects();
+    _project__WEBPACK_IMPORTED_MODULE_0__["default"].saveProjects();
     mainContainer.setAttribute("data-page", "All Projects");
     mainContent.textContent = "";
 
     const pageHeader = createDiv("page-header");
     const pageTitle = createH2("page-title");
-    const projectsNumb = projects.todoList.length;
+    const projectsNumb = _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList.length;
     pageTitle.textContent = `You have: ${projectsNumb} projects`;
     const cardsContainer = createDiv("cards-container");
 
-    projects.todoList.forEach((project, index) => {
+    _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList.forEach((project, index) => {
       project.id = index;
 
       const projectCard = createProjectCard(project, index);
@@ -1504,7 +1516,7 @@ const domElements = (() => {
     projectEditBtn.setAttribute("data-edit-project-btn", "");
     projectEditBtn.setAttribute("data-index", index);
     projectEditBtn.addEventListener("click", () =>
-      handlers.openEditProjectModal(project)
+      _handlers__WEBPACK_IMPORTED_MODULE_2__["default"].openEditProjectModal(project)
     );
 
     const projectDeleteBtn = createButton("project-delete");
@@ -1546,6 +1558,133 @@ const domElements = (() => {
 })();
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (domElements);
+
+
+/***/ }),
+/* 22 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _dom_elements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(21);
+
+
+const projects = (() => {
+  let todoList = [];
+
+  if (localStorage.getItem("todoProjects") === null) {
+    todoList = [
+      {
+        name: "Keep Going",
+        description: "something is better than nothing",
+        color: "#93CDF0",
+        todos: [],
+      },
+    ];
+  } else {
+    const loadProjectsFromStorage = JSON.parse(
+      localStorage.getItem("todoProjects")
+    );
+    todoList = loadProjectsFromStorage;
+  }
+
+  const saveProjects = () => {
+    localStorage.setItem("todoProjects", JSON.stringify(projects.todoList));
+  };
+
+  class Project {
+    constructor(name, description, color) {
+      this.name = name;
+      this.description = description;
+      this.color = color;
+      this.todos = [];
+    }
+  }
+
+  const createNewProject = (name, description, color) => {
+    const project = new Project(name, description, color);
+    todoList.push(project);
+    _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].renderAllProjectsPage();
+  };
+
+  const editCurrentProject = (index, newName, newDescription, newColor) => {
+    const currentProject = projects.todoList[index];
+
+    currentProject.name = newName;
+    currentProject.description = newDescription;
+    currentProject.color = newColor;
+
+    _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].renderAllProjectsPage();
+  };
+
+  const deleteCurrentProject = (index) => {
+    todoList.splice(index, 1);
+    _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].renderAllProjectsPage();
+  };
+
+  return {
+    todoList,
+    createNewProject,
+    editCurrentProject,
+    deleteCurrentProject,
+    saveProjects,
+  };
+})();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (projects);
+
+
+/***/ }),
+/* 23 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
+
+
+const todos = (() => {
+  class ToDo {
+    constructor(projectId, title, dueDate, priority) {
+      this.projectId = projectId;
+      this.title = title;
+      this.dueDate = dueDate;
+      this.priority = priority;
+    }
+  }
+
+  const createNewToDo = (projectId, title, dueDate, priority) => {
+    const todo = new ToDo(projectId, title, dueDate, priority);
+    _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos.push(todo);
+  };
+
+  const editCurrentToDo = (
+    projectId,
+    index,
+    newTitle,
+    newDueDate,
+    newPriority
+  ) => {
+    _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos[index].title = newTitle;
+    _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos[index].dueDate = newDueDate;
+    _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos[index].priority = newPriority;
+  };
+
+  const deleteCurrentToDo = (projectId, index) => {
+    _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos.splice(index, 1);
+  };
+
+  return {
+    createNewToDo,
+    editCurrentToDo,
+    deleteCurrentToDo,
+  };
+})();
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (todos);
 
 
 /***/ })
