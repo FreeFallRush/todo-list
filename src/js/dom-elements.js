@@ -67,6 +67,9 @@ const domElements = (() => {
   };
 
   //Modals
+
+  const formContainer = document.querySelector("[data-modal-form]");
+
   const createAddProjectModal = () => {
     const divTitle = createDiv("modal-title");
     const modalTitle = createH2("modal-new-project-title");
