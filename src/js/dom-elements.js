@@ -374,6 +374,9 @@ const domElements = (() => {
     projectDeleteBtn.textContent = "Delete";
     projectDeleteBtn.setAttribute("data-delete-project-btn", "");
     projectDeleteBtn.setAttribute("data-index", index);
+    projectDeleteBtn.addEventListener("click", () =>
+      projects.deleteCurrentProject(index)
+    );
 
     const toDoSection = createDiv("todos-section");
     const toDoSectionActions = createDiv("todos-section-actions");
