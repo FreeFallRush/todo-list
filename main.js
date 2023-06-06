@@ -1223,10 +1223,63 @@ const domElements = (() => {
     formContainer.append(divTitle, divToDoTitleInput, dateDiv, priorityDiv);
   };
 
+  const createEditToDoModal = () => {
+    const divTitle = createDiv("modal-title");
+    const modalTitle = createH2("modal-edit-todo-title");
+    modalTitle.textContent = "Edit ToDo";
+
+    const divToDoTitleInput = createDiv("todo-name-form");
+    const inputNameText = createH3("todo-name-text");
+    inputNameText.textContent = "Edit Name:";
+    const editToDoLabel = createLabel("edit-todo");
+    const editToDoInput = createInput("edit-todo", "text");
+    editToDoInput.setAttribute("data-edit-todo-name", "");
+    editToDoInput.maxLength = 150;
+    editToDoInput.setAttribute("required", "");
+
+    const dateDiv = createDiv("todo-duedate");
+    const dateInputNameText = createH3("todo-duedate-text");
+    dateInputNameText.textContent = "Due Date:";
+    const editDueDateLabel = createLabel("edit-duedate");
+    const editDueDateInput = createInput("edit-duedate", "date");
+    editDueDateInput.setAttribute("data-edit-duedate-input", "");
+    editDueDateInput.setAttribute("required", "");
+
+    const priorityDiv = createDiv("todo-priority");
+    const priorityNameText = createH3("todo-priority-text");
+    priorityNameText.textContent = "Priority: ";
+    const editSelectPriorityLabel = createLabel("todo-priority");
+    const editSelectPriority = createSelectElement("todo-priority");
+    editSelectPriority.setAttribute("data-edit-select", "");
+    const priorityLow = createOption("Low Priority");
+    priorityLow.textContent = "Low Priority";
+    const priorityMedium = createOption("Medium Priority");
+    priorityMedium.textContent = "Medium Priority";
+    const priorityHigh = createOption("High Priority");
+    priorityHigh.textContent = "High Priority";
+
+    formContainer.textContent = "";
+
+    divTitle.appendChild(modalTitle);
+    divToDoTitleInput.append(inputNameText, editToDoLabel, editToDoInput);
+
+    dateDiv.append(dateInputNameText, editDueDateLabel, editDueDateInput);
+
+    editSelectPriority.append(priorityLow, priorityMedium, priorityHigh);
+    priorityDiv.append(
+      priorityNameText,
+      editSelectPriorityLabel,
+      editSelectPriority
+    );
+
+    formContainer.append(divTitle, divToDoTitleInput, dateDiv, priorityDiv);
+  };
+
   return {
     createAddProjectModal,
     createEditProjectModal,
     createAddToDoModal,
+    createEditToDoModal,
   };
 })();
 
