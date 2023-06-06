@@ -682,3 +682,213 @@ i.fa-trash {
   padding: 8px;
   color: var(--secondary-color);
 }
+
+/* Media Queries */
+
+@media all and (max-width: 913px) {
+  .todo-card {
+    width: 80%;
+    height: 180px;
+    margin-bottom: 23px;
+  }
+  .todo-content {
+    height: 170px;
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+}
+
+@media all and (max-width: 880px) {
+  .cards-container {
+    width: 90%;
+  }
+  .project-card {
+    font-size: 0.9rem;
+    height: auto;
+    width: 100%;
+  }
+  .todo-card {
+    width: 80%;
+    height: 180px;
+    margin-bottom: 33px;
+  }
+  .todo-content {
+    height: 170px;
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+  .todo-actions {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    margin-right: 8px;
+  }
+  .todo-actions i {
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+  i.fa-pen-to-square {
+    margin-right: 5px;
+  }
+}
+
+@media all and (max-width: 680px) {
+  .todo-card {
+    width: 90%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  .todo-content {
+    margin-top: 8px;
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    border: var(--dashed-border-black);
+    padding: 3px;
+  }
+
+  .todo-name-container,
+  .todo-duedate-container,
+  .todo-priority-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 88%;
+    height: auto;
+    border-bottom: var(--dashed-border-black);
+    padding: 3px;
+  }
+  .todo-actions {
+    display: flex;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    justify-content: center;
+  }
+}
+
+@media all and (max-width: 450px) {
+  .logo {
+    left: 20px;
+  }
+  #header {
+    display: flex;
+    line-height: 70px;
+    width: 100%;
+    transition: margin-left 0.5s;
+  }
+  .header-right {
+    margin-right: 5px;
+  }
+  #add-project-btn {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    font-family: "RobotoMedium";
+    cursor: pointer;
+    background-color: var(--secondary-color);
+  }
+  #sidebar {
+    width: 100%;
+    height: 100%;
+  }
+  .modal-form {
+    width: 68%;
+  }
+  .modal-form-container > div > h3 {
+    font-size: 0.7rem;
+  }
+  .project-color-form {
+    padding-left: 6px;
+    padding-right: 15px;
+  }
+  .color-input-text {
+    padding-right: 4px;
+  }
+  .page-title {
+    font-size: 0.9rem;
+    text-shadow: var(--logo-text-shadow);
+    padding: 20px;
+    margin-bottom: 10px;
+  }
+  .project-title {
+    padding: 3px;
+    font-size: 0.9rem;
+  }
+  .project-description {
+    padding: 3px;
+    font-size: 0.9rem;
+  }
+  .project-edit,
+  .project-delete {
+    width: 80px;
+    font-size: 0.8;
+  }
+  .add-todo-btn {
+    padding: 8px;
+    font-size: 1rem;
+  }
+  .todo-card {
+    width: 90%;
+    height: auto;
+  }
+  .todo-content {
+    margin-top: 8px;
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    border: var(--dashed-border-black);
+    padding: 3px;
+  }
+  .todo-name-container,
+  .todo-duedate-container,
+  .todo-priority-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 88%;
+    height: auto;
+    border-bottom: var(--dashed-border-black);
+    padding: 3px;
+  }
+  .todo-name {
+    word-break: break-all;
+  }
+  .todo-actions {
+    width: 100%;
+    display: flex;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    justify-content: center;
+    width: 88%;
+    height: auto;
+  }
+  .todo-actions i {
+    font-size: 15px;
+    width: auto;
+    text-align: center;
+    padding: 10px;
+  }
+
+  i.fa-pen-to-square {
+    margin-right: 12px;
+  }
+}
+
+@media all and (max-width: 330px) {
+  .todo-priority {
+    font-size: 0.6rem;
+    text-align: center;
+  }
+  .todo-actions i {
+    font-size: 10px;
+    width: auto;
+    text-align: center;
+    padding: 7px;
+  }
+}
