@@ -1566,6 +1566,8 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _js_handlers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
+/* harmony import */ var _js_dom_elements__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(21);
+
 
 
 
@@ -1575,6 +1577,7 @@ addNewProjectBtn.addEventListener("click", () => {
   _js_handlers__WEBPACK_IMPORTED_MODULE_1__["default"].openNewProjectModal();
 });
 
+_js_dom_elements__WEBPACK_IMPORTED_MODULE_2__["default"].renderAllProjectsPage();
 _js_handlers__WEBPACK_IMPORTED_MODULE_1__["default"].toggleSidebar();
 
 })();
