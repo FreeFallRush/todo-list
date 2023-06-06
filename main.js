@@ -955,6 +955,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const addNewProjectBtn = document.querySelector("[data-add-new-project]");
+
+addNewProjectBtn.addEventListener("click", () => {
+  _js_handlers__WEBPACK_IMPORTED_MODULE_1__["default"].openNewProjectModal();
+});
+
 _js_handlers__WEBPACK_IMPORTED_MODULE_1__["default"].toggleSidebar();
 
 })();
