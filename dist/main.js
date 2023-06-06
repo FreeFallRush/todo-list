@@ -2003,6 +2003,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
+/* harmony import */ var _dom_elements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(21);
+
 
 
 const todos = (() => {
@@ -2018,7 +2020,7 @@ const todos = (() => {
   const createNewToDo = (projectId, title, dueDate, priority) => {
     const todo = new ToDo(projectId, title, dueDate, priority);
     _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos.push(todo);
-    domElements.renderToDos();
+    _dom_elements__WEBPACK_IMPORTED_MODULE_1__["default"].renderToDos();
   };
 
   const editCurrentToDo = (
@@ -2031,12 +2033,12 @@ const todos = (() => {
     _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos[index].title = newTitle;
     _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos[index].dueDate = newDueDate;
     _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos[index].priority = newPriority;
-    domElements.renderToDos();
+    _dom_elements__WEBPACK_IMPORTED_MODULE_1__["default"].renderToDos();
   };
 
   const deleteCurrentToDo = (projectId, index) => {
     _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos.splice(index, 1);
-    domElements.renderToDos();
+    _dom_elements__WEBPACK_IMPORTED_MODULE_1__["default"].renderToDos();
   };
 
   return {

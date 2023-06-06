@@ -1,4 +1,5 @@
 import projects from "./project";
+import domElements from "./dom-elements";
 
 const todos = (() => {
   class ToDo {
