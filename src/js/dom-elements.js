@@ -1,3 +1,7 @@
+import projects from "./project";
+import todos from "./todo";
+import handlers from "./handlers";
+
 const domElements = (() => {
   //Main dom elements
   const createH2 = (className) => {

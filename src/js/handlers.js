@@ -1,4 +1,7 @@
 import domElements from "./dom-elements";
+import projects from "./project";
+import todos from "./todo";
+
 const handlers = (() => {
   const toggleSidebar = () => {
     const nav = document.querySelector("nav");
