@@ -13,6 +13,7 @@ const todos = (() => {
   const createNewToDo = (projectId, title, dueDate, priority) => {
     const todo = new ToDo(projectId, title, dueDate, priority);
     projects.todoList[projectId].todos.push(todo);
+    domElements.renderToDos();
   };
 
   const editCurrentToDo = (
@@ -25,10 +26,12 @@ const todos = (() => {
     projects.todoList[projectId].todos[index].title = newTitle;
     projects.todoList[projectId].todos[index].dueDate = newDueDate;
     projects.todoList[projectId].todos[index].priority = newPriority;
+    domElements.renderToDos();
   };
 
   const deleteCurrentToDo = (projectId, index) => {
     projects.todoList[projectId].todos.splice(index, 1);
+    domElements.renderToDos();
   };
 
   return {
