@@ -1107,20 +1107,18 @@ const handlers = (() => {
       "[data-new-project-description]"
     );
     const colorInput = document.querySelector("[data-project-color]");
-
-    if (nameInput.value === "") {
+    if (nameInput.value == -"") {
       nameInput.value = "Project Unnamed";
     }
 
+    const projectName = nameInput.value;
+    const projectDescription = descriptionInput.value;
+    const projectColor = colorInput.value;
+
     if (projectName !== "") {
-      projects.createNewProject(
-        nameInput.value,
-        descriptionInput.value,
-        colorInput.value
-      );
+      projects.createNewProject(projectName, projectDescription, projectColor);
       _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].renderAllProjectsPage();
     }
-
     modalForm.removeEventListener("submit", addNewProjectEvent);
     modal.classList.add("hidden");
   };
@@ -1478,6 +1476,7 @@ const domElements = (() => {
 
       cardsContainer.append(projectCard);
     });
+
     mainContent.textContent = "";
     pageHeader.append(pageTitle);
 
