@@ -441,6 +441,23 @@ const domElements = (() => {
       toDosContainer.append(allTodos);
     }
 
+    if (currentPage === "Upcoming") {
+      const dates = getUpcomingDates();
+      projects.todoList.forEach((project) => {
+        allToDosToFilter.push(...project.todos);
+      });
+      allToDosToFilter.forEach((todo) => {
+        if (dates.includes(todo.dueDate)) {
+          toDosNumb += 1;
+          const toDoCard = createToDoCard(todo);
+          toDosContainer.textContent = "";
+          allTodos.append(toDoCard);
+        }
+        pageTitle.textContent = `Today's ToDos: ${toDosNumb} ToDos`;
+      });
+      toDosContainer.append(allTodos);
+    }
+
     if (currentPage === `${pagePId}-Project`) {
       const currentProjectTodos = projects.todoList[pagePId].todos;
       currentProjectTodos.forEach((todo, index) => {
@@ -572,6 +589,30 @@ const domElements = (() => {
     renderToDos();
   };
 
+  const renderUpcomingPage = () => {
+    mainContainer.setAttribute("data-page", "Upcoming");
+    const pageHeader = createDiv("page-header");
+    const pageTitle = createH2("page-title");
+    const toDosContainer = createDiv("todos-container");
+
+    mainContent.textContent = "";
+
+    pageHeader.append(pageTitle);
+    mainContent.append(pageHeader, toDosContainer);
+    renderToDos();
+  };
+
+  const getUpcomingDates = () => {
+    const upcomingDates = eachDayOfInterval({
+      start: addDays(new Date(), 1),
+      end: addDays(new Date(), 7),
+    });
+    upcomingDates.forEach((date, index) =>
+      upcomingDates.splice(index, 1, format(date, "yyyy-MM-dd"))
+    );
+    return upcomingDates;
+  };
+
   return {
     createAddProjectModal,
     createEditProjectModal,
@@ -582,6 +623,7 @@ const domElements = (() => {
     renderToDos,
     renderAllToDosPage,
     renderTodayPage,
+    renderUpcomingPage,
   };
 })();
 
