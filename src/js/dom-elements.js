@@ -287,6 +287,28 @@ const domElements = (() => {
     formContainer.append(divTitle, divToDoTitleInput, dateDiv, priorityDiv);
   };
 
+  //Project Card
+
+  const createProjectCard = (project, index) => {
+    const projectCard = createDiv("project-card");
+    projectCard.setAttribute("data-project", index);
+    projectCard.style.backgroundColor = project.color;
+
+    const projectName = createH3("project-title");
+    projectName.setAttribute("data-index", index);
+    projectName.textContent = project.name;
+    const tasksNumb = createPara("tasks-number");
+    tasksNumb.textContent = `Tasks(${project.todos.length})`;
+
+    const projectDescription = createPara("project-description");
+    projectDescription.setAttribute("data-index", index);
+    const textDescription = project.description;
+    const truncatedTextDescription = textDescription.substring(0, 50) + "...";
+    projectDescription.textContent = truncatedTextDescription;
+    projectCard.append(projectName, tasksNumb, projectDescription);
+    return projectCard;
+  };
+
   return {
     createAddProjectModal,
     createEditProjectModal,
