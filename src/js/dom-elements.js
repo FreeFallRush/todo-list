@@ -1,6 +1,7 @@
 import projects from "./project";
 import todos from "./todo";
 import handlers from "./handlers";
+import { format, isPast, addDays, eachDayOfInterval } from "date-fns";
 
 const domElements = (() => {
   //Main dom elements
@@ -311,6 +312,83 @@ const domElements = (() => {
     projectDescription.textContent = truncatedTextDescription;
     projectCard.append(projectName, tasksNumb, projectDescription);
     return projectCard;
+  };
+
+  // ToDo Card
+
+  const createToDoCard = (todo) => {
+    const currentPage = document
+      .querySelector("#main-container")
+      .getAttribute("data-page");
+
+    const toDoCard = createDiv("todo-card");
+    toDoCard.style.backgroundColor = projects.todoList[todo.projectId].color;
+    const toDoCardContent = createDiv("todo-content");
+
+    const toDoNameDiv = createDiv("todo-name-container");
+    const toDoNamePara = createPara("todo-name");
+    toDoNamePara.textContent = todo.title;
+
+    const dueDateDiv = createDiv("todo-duedate-container");
+    const toDoDueDatePara = createPara("todo-duedate");
+
+    toDoDueDatePara.textContent = format(new Date(todo.dueDate), "dd-MM-yyyy");
+
+    if (isPast(addDays(new Date(todo.dueDate), 1))) {
+      toDoDueDatePara.textContent = "Expired";
+    }
+
+    if (
+      currentPage === "All ToDos" ||
+      currentPage === "Today" ||
+      currentPage === "Upcoming" ||
+      currentPage === "Important" ||
+      currentPage === "Expired"
+    ) {
+      const todoProjectLabel = createPara("todo-project-label");
+      todoProjectLabel.textContent = `Project: ${
+        projects.todoList[todo.projectId].name
+      }`;
+      toDoCard.append(todoProjectLabel);
+    }
+
+    const priorityDiv = createDiv("todo-priority-container");
+    const toDoPriorityPara = createPara("todo-priority");
+
+    if (todo.priority === "Low Priority") {
+      priorityDiv.style.backgroundColor = "#1bbfd1";
+      priorityDiv.style.opacity = 0.5;
+      toDoPriorityPara.textContent = todo.priority;
+    } else if (todo.priority === "Medium Priority") {
+      priorityDiv.style.backgroundColor = "#ff7300";
+      priorityDiv.style.opacity = 0.5;
+      toDoPriorityPara.textContent = todo.priority;
+    } else if (todo.priority === "High Priority") {
+      priorityDiv.style.backgroundColor = "#c40a5b";
+      priorityDiv.style.opacity = 0.5;
+      toDoPriorityPara.textContent = todo.priority;
+    }
+
+    const toDoActions = createDiv("todo-actions");
+    toDoActions.setAttribute("data-todo-btns", todo.projectId);
+
+    const editToDoBtn = createDiv("edit-todo-btn");
+    editToDoBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i>`;
+    editToDoBtn.setAttribute("data-edit-todo-btn", todo.id);
+
+    const deleteToDoBtn = createDiv("delete-todo-btn");
+    deleteToDoBtn.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+    deleteToDoBtn.setAttribute("data-delete-todo-btn", todo.id);
+
+    toDoNameDiv.append(toDoNamePara);
+    dueDateDiv.append(toDoDueDatePara);
+    priorityDiv.append(toDoPriorityPara);
+    toDoActions.append(editToDoBtn, deleteToDoBtn);
+    toDoCardContent.append(toDoNameDiv, dueDateDiv, priorityDiv, toDoActions);
+
+    toDoCard.append(toDoCardContent);
+
+    return toDoCard;
   };
 
   //Render Pages
