@@ -18,6 +18,9 @@ sidebarLinks.forEach((link) => {
       case "All ToDos":
         domElements.renderAllToDosPage();
         break;
+      case "Today":
+        domElements.renderTodayPage();
+        break;
     }
   });
 });
