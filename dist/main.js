@@ -1446,7 +1446,7 @@ const handlers = (() => {
     modalForm.removeEventListener("submit", addNewProjectEvent);
     modalForm.removeEventListener("submit", editProjectEvent);
     modalForm.removeEventListener("submit", addNewToDoEvent);
-
+    modalForm.removeEventListener("submit", addEditToDoEvent);
     modal.classList.add("hidden");
   });
 
@@ -1456,7 +1456,7 @@ const handlers = (() => {
       modalForm.removeEventListener("submit", addNewProjectEvent);
       modalForm.removeEventListener("submit", editProjectEvent);
       modalForm.removeEventListener("submit", addNewToDoEvent);
-
+      modalForm.removeEventListener("submit", addEditToDoEvent);
       modal.classList.add("hidden");
     }
   });
@@ -1573,11 +1573,74 @@ const handlers = (() => {
     modalForm.removeEventListener("submit", addNewToDoEvent);
   };
 
+  //Edit ToDo
+
+  const openEditToDoModal = (todo) => {
+    _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].createEditToDoModal();
+    const editToDoNameInput = document.querySelector("[data-edit-todo-name]");
+    editToDoNameInput.value = todo.title;
+
+    const editDueDateInput = document.querySelector(
+      "[data-edit-duedate-input]"
+    );
+    editDueDateInput.value = todo.dueDate;
+
+    const editPrioritySelect = document.querySelector("[data-edit-select]");
+    editPrioritySelect.value = todo.priority;
+
+    modalForm.addEventListener("submit", addEditToDoEvent);
+    modal.classList.remove("hidden");
+    modalForm.taskIndex = todo.id;
+    modalForm.projectIndex = todo.projectId;
+  };
+
+  const addEditToDoEvent = (e) => {
+    e.preventDefault();
+
+    const editToDoNameInput = document.querySelector("[data-edit-todo-name]");
+    const editDueDateInput = document.querySelector(
+      "[data-edit-duedate-input]"
+    );
+    const editPrioritySelect = document.querySelector("[data-edit-select]");
+
+    _todo__WEBPACK_IMPORTED_MODULE_2__["default"].editCurrentToDo(
+      e.currentTarget.projectIndex,
+      e.currentTarget.taskIndex,
+      editToDoNameInput.value,
+      editDueDateInput.value,
+      editPrioritySelect.value
+    );
+
+    const currentPage = document
+      .querySelector("#main-container")
+      .getAttribute("data-page");
+    if (currentPage === "All ToDos") {
+      _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].renderAllToDosPage();
+    } else if (currentPage === "Today") {
+      _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].renderTodayPage();
+    } else if (currentPage === "Upcoming") {
+      _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].renderUpcomingPage();
+    } else if (currentPage === "Important") {
+      _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].renderImportantPage();
+    } else if (currentPage === "Expired") {
+      _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].renderExpiredPage();
+    } else {
+      _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].renderSingleProjectPage(
+        _project__WEBPACK_IMPORTED_MODULE_1__["default"].todoList[e.currentTarget.projectIndex],
+        e.currentTarget.projectIndex
+      );
+    }
+
+    modal.classList.add("hidden");
+    modalForm.removeEventListener("submit", addEditToDoEvent);
+  };
+
   return {
     toggleSidebar,
     openNewProjectModal,
     openEditProjectModal,
     openNewToDoModal,
+    openEditToDoModal,
   };
 })();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (handlers);
