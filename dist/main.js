@@ -1922,9 +1922,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const addNewProjectBtn = document.querySelector("[data-add-new-project]");
+const sidebarLinks = document.querySelectorAll(".sidebar-link");
 
 addNewProjectBtn.addEventListener("click", () => {
   _js_handlers__WEBPACK_IMPORTED_MODULE_1__["default"].openNewProjectModal();
+});
+
+sidebarLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    switch (link.innerText) {
+      case "All Projects":
+        _js_dom_elements__WEBPACK_IMPORTED_MODULE_2__["default"].renderAllProjectsPage();
+        break;
+    }
+  });
 });
 
 _js_dom_elements__WEBPACK_IMPORTED_MODULE_2__["default"].renderAllProjectsPage();
