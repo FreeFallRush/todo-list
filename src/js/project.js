@@ -46,6 +46,7 @@ const projects = (() => {
     currentProject.color = newColor;
 
     domElements.renderAllProjectsPage();
+    domElements.renderSingleProjectPage(currentProject, currentProject.id);
   };
 
   const deleteCurrentProject = (index) => {
