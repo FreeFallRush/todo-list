@@ -404,3 +404,130 @@ textarea:focus {
   color: var(--secondary-color);
   text-shadow: var(--logo-3D-text-shadow);
 }
+
+/* All Projects Page */
+
+.page-header {
+  width: 100%;
+  background: var(--nav-gradient-background);
+  color: var(--secondary-color);
+  margin-bottom: 15px;
+}
+
+.page-title {
+  font-family: "RobotoBlack";
+  text-shadow: var(--logo-text-shadow);
+  padding: 20px;
+  text-align: center;
+}
+
+.cards-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-card {
+  width: 70%;
+  word-break: break-all;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: var(--main-box-shadow);
+  margin-bottom: 18px;
+  border-radius: 8px;
+}
+
+.project-title {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  text-align: center;
+  background-color: rgb(109, 152, 162);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: var(--secondary-color);
+}
+
+.tasks-number {
+  width: 100%;
+  background-color: rgb(242, 255, 195);
+  text-align: center;
+  border-bottom: var(--dashed-border-black);
+}
+
+.project-description {
+  width: 100%;
+  height: 98%;
+  padding: 10px;
+  text-align: center;
+  word-break: break-all;
+  background-color: rgb(242, 255, 195);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* Single Project Page */
+
+.project-page {
+  width: 100%;
+  height: auto;
+}
+.project-page .page-header {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--nav-gradient-background);
+  border-bottom: var(--dashed-border-black);
+  margin-bottom: 0;
+}
+
+.project-name-header {
+  width: 90%;
+  margin-top: 15px;
+  color: var(--secondary-color);
+  text-align: center;
+  word-break: break-all;
+  text-shadow: var(--logo-text-shadow);
+}
+.project-description-header {
+  width: 90%;
+  margin-top: 10px;
+  color: var(--secondary-color);
+  text-align: center;
+  word-break: break-all;
+}
+
+.project-edit,
+.project-delete {
+  margin-top: 15px;
+  padding: 10px;
+  width: 100px;
+  font-size: 1.3rem;
+  font-family: "OhMyNotes";
+  margin-bottom: 18px;
+  background-color: var(--secondary-color);
+  border: none;
+  box-shadow: var(--main-box-shadow);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.project-edit {
+  margin-right: 15px;
+}
+
+.project-edit:hover,
+.project-delete:hover {
+  box-shadow: var(--inset-box-shadow);
+  color: var(--secondary-color);
+  background-color: var(--nav-gradient-background);
+}
