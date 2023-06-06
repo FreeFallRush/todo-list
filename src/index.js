@@ -27,6 +27,9 @@ sidebarLinks.forEach((link) => {
       case "Important":
         domElements.renderImportantPage();
         break;
+      case "Expired":
+        domElements.renderExpiredPage();
+        break;
     }
   });
 });
