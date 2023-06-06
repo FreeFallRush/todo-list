@@ -1885,6 +1885,7 @@ const domElements = (() => {
     const addToDoBtn = createButton("add-todo-btn");
     addToDoBtn.textContent = `Add New ToDo`;
     addToDoBtn.setAttribute("data-add-todo-btn", "");
+    addToDoBtn.addEventListener("click", () => _handlers__WEBPACK_IMPORTED_MODULE_2__["default"].openNewToDoModal());
 
     const toDosContainer = createDiv("todos-container");
     toDosContainer.setAttribute("data-todos-container", "");
