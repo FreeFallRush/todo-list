@@ -754,6 +754,33 @@ module.exports = __webpack_require__.p + "38b31a6b3cbbb2ececdc.woff2";
 
 module.exports = __webpack_require__.p + "a29d5a9079c97e7cfb61.woff";
 
+/***/ }),
+/* 20 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const handlers = (() => {
+  const toggleSidebar = () => {
+    const nav = document.querySelector("nav");
+    const toggle_btn = document.getElementById("toggle-btn");
+    const content = document.getElementById("main-container");
+
+    toggle_btn.onclick = function () {
+      nav.classList.toggle("hide");
+      content.classList.toggle("expand");
+    };
+  };
+
+  return {
+    toggleSidebar,
+  };
+})();
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (handlers);
+
+
 /***/ })
 /******/ 	]);
 /************************************************************************/
@@ -897,7 +924,11 @@ var __webpack_exports__ = {};
 (() => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _js_handlers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
 
+
+
+_js_handlers__WEBPACK_IMPORTED_MODULE_1__["default"].toggleSidebar();
 
 })();
 
