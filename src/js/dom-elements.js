@@ -474,6 +474,23 @@ const domElements = (() => {
       toDosContainer.append(allTodos);
     }
 
+    if (currentPage === "Expired") {
+      projects.todoList.forEach((project) => {
+        allToDosToFilter.push(...project.todos);
+      });
+
+      allToDosToFilter.forEach((todo) => {
+        if (isPast(addDays(new Date(todo.dueDate), 1))) {
+          toDosNumb += 1;
+          const toDoCard = createToDoCard(todo);
+          toDosContainer.textContent = "";
+          allTodos.append(toDoCard);
+        }
+        pageTitle.textContent = `Expired ToDos: ${toDosNumb} ToDos`;
+      });
+      toDosContainer.append(allTodos);
+    }
+
     if (currentPage === `${pagePId}-Project`) {
       const currentProjectTodos = projects.todoList[pagePId].todos;
       currentProjectTodos.forEach((todo, index) => {
@@ -642,6 +659,19 @@ const domElements = (() => {
     renderToDos();
   };
 
+  const renderExpiredPage = () => {
+    mainContainer.setAttribute("data-page", "Expired");
+    const pageHeader = createDiv("page-header");
+    const pageTitle = createH2("page-title");
+    const toDosContainer = createDiv("todos-container");
+
+    mainContent.textContent = "";
+
+    pageHeader.append(pageTitle);
+    mainContent.append(pageHeader, toDosContainer);
+    renderToDos();
+  };
+
   return {
     createAddProjectModal,
     createEditProjectModal,
@@ -654,6 +684,7 @@ const domElements = (() => {
     renderTodayPage,
     renderUpcomingPage,
     renderImportantPage,
+    renderExpiredPage,
   };
 })();
 
