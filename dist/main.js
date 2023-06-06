@@ -2038,14 +2038,34 @@ const domElements = (() => {
     const editToDoBtn = createDiv("edit-todo-btn");
     editToDoBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i>`;
     editToDoBtn.setAttribute("data-edit-todo-btn", todo.id);
+    editToDoBtn.addEventListener("click", () => {
+      _handlers__WEBPACK_IMPORTED_MODULE_2__["default"].openEditToDoModal(todo);
+    });
 
     const deleteToDoBtn = createDiv("delete-todo-btn");
     deleteToDoBtn.innerHTML = `<i class="fa-solid fa-trash"></i>`;
     deleteToDoBtn.setAttribute("data-delete-todo-btn", todo.id);
     deleteToDoBtn.addEventListener("click", () => {
       const projectId = todo.projectId;
-      _todo__WEBPACK_IMPORTED_MODULE_1__["default"].deleteCurrentToDo(projectId, todo.id);
-      renderSingleProjectPage(_project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId], projectId);
+      if (currentPage === "All ToDos") {
+        _todo__WEBPACK_IMPORTED_MODULE_1__["default"].deleteCurrentToDo(projectId, todo.id);
+        renderAllToDosPage();
+      } else if (currentPage === "Today") {
+        _todo__WEBPACK_IMPORTED_MODULE_1__["default"].deleteCurrentToDo(projectId, todo.id);
+        renderTodayPage();
+      } else if (currentPage === "Upcoming") {
+        _todo__WEBPACK_IMPORTED_MODULE_1__["default"].deleteCurrentToDo(projectId, todo.id);
+        renderUpcomingPage();
+      } else if (currentPage === "Important") {
+        _todo__WEBPACK_IMPORTED_MODULE_1__["default"].deleteCurrentToDo(projectId, todo.id);
+        renderImportantPage();
+      } else if (currentPage === "Expired") {
+        _todo__WEBPACK_IMPORTED_MODULE_1__["default"].deleteCurrentToDo(projectId, todo.id);
+        renderExpiredPage();
+      } else {
+        _todo__WEBPACK_IMPORTED_MODULE_1__["default"].deleteCurrentToDo(projectId, todo.id);
+        renderSingleProjectPage(_project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId], projectId);
+      }
     });
 
     toDoNameDiv.append(toDoNamePara);

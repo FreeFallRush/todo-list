@@ -375,14 +375,34 @@ const domElements = (() => {
     const editToDoBtn = createDiv("edit-todo-btn");
     editToDoBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i>`;
     editToDoBtn.setAttribute("data-edit-todo-btn", todo.id);
+    editToDoBtn.addEventListener("click", () => {
+      handlers.openEditToDoModal(todo);
+    });
 
     const deleteToDoBtn = createDiv("delete-todo-btn");
     deleteToDoBtn.innerHTML = `<i class="fa-solid fa-trash"></i>`;
     deleteToDoBtn.setAttribute("data-delete-todo-btn", todo.id);
     deleteToDoBtn.addEventListener("click", () => {
       const projectId = todo.projectId;
-      todos.deleteCurrentToDo(projectId, todo.id);
-      renderSingleProjectPage(projects.todoList[projectId], projectId);
+      if (currentPage === "All ToDos") {
+        todos.deleteCurrentToDo(projectId, todo.id);
+        renderAllToDosPage();
+      } else if (currentPage === "Today") {
+        todos.deleteCurrentToDo(projectId, todo.id);
+        renderTodayPage();
+      } else if (currentPage === "Upcoming") {
+        todos.deleteCurrentToDo(projectId, todo.id);
+        renderUpcomingPage();
+      } else if (currentPage === "Important") {
+        todos.deleteCurrentToDo(projectId, todo.id);
+        renderImportantPage();
+      } else if (currentPage === "Expired") {
+        todos.deleteCurrentToDo(projectId, todo.id);
+        renderExpiredPage();
+      } else {
+        todos.deleteCurrentToDo(projectId, todo.id);
+        renderSingleProjectPage(projects.todoList[projectId], projectId);
+      }
     });
 
     toDoNameDiv.append(toDoNamePara);
