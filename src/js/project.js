@@ -3,6 +3,26 @@ import domElements from "./dom-elements";
 const projects = (() => {
   let todoList = [];
 
+  if (localStorage.getItem("todoProjects") === null) {
+    todoList = [
+      {
+        name: "Keep Going",
+        description: "something is better than nothing",
+        color: "#93CDF0",
+        todos: [],
+      },
+    ];
+  } else {
+    const loadProjectsFromStorage = JSON.parse(
+      localStorage.getItem("todoProjects")
+    );
+    todoList = loadProjectsFromStorage;
+  }
+
+  const saveProjects = () => {
+    localStorage.setItem("todoProjects", JSON.stringify(projects.todoList));
+  };
+
   class Project {
     constructor(name, description, color) {
       this.name = name;
@@ -38,6 +58,7 @@ const projects = (() => {
     createNewProject,
     editCurrentProject,
     deleteCurrentProject,
+    saveProjects,
   };
 })();
 
