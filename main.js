@@ -863,6 +863,34 @@ textarea:focus {
   color: var(--secondary-color);
   background-color: var(--nav-gradient-background);
 }
+
+/* ToDos Section */
+
+.todos-section {
+  width: 100%;
+}
+
+.todos-section-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-todo-btn {
+  margin-top: 10px;
+  padding: 10px;
+  cursor: pointer;
+  font-family: "OhMyNotes";
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+  box-shadow: var(--main-box-shadow);
+  outline: none;
+  border: var(--dashed-border-yellow);
+  border-radius: 8px;
+}
 `, ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
@@ -1083,6 +1111,7 @@ const handlers = (() => {
   closeModalBtn.addEventListener("click", (e) => {
     e.preventDefault();
     modalForm.removeEventListener("submit", addNewProjectEvent);
+    modalForm.removeEventListener("submit", editProjectEvent);
 
     modal.classList.add("hidden");
   });
@@ -1091,6 +1120,7 @@ const handlers = (() => {
     if (e.target === modal) {
       e.preventDefault();
       modalForm.removeEventListener("submit", addNewProjectEvent);
+      modalForm.removeEventListener("submit", editProjectEvent);
 
       modal.classList.add("hidden");
     }
@@ -1128,9 +1158,60 @@ const handlers = (() => {
     modal.classList.add("hidden");
   };
 
+  //Edit Project
+
+  const openEditProjectModal = (project) => {
+    _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].createEditProjectModal();
+
+    const editNameInput = document.querySelector("[data-edit-project-name]");
+    const editDescInput = document.querySelector(
+      "[data-edit-project-description]"
+    );
+    const editColorInput = document.querySelector("[data-edit-project-color]");
+
+    editNameInput.value = project.name;
+    editDescInput.value = project.description;
+    editColorInput.value = project.color;
+
+    modalForm.addEventListener("submit", editProjectEvent);
+    modal.classList.remove("hidden");
+  };
+
+  const editProjectEvent = (e) => {
+    e.preventDefault();
+    const editNameInput = document.querySelector("[data-edit-project-name]");
+    const editDescInput = document.querySelector(
+      "[data-edit-project-description]"
+    );
+    const editColorInput = document.querySelector("[data-edit-project-color]");
+    const editProjectBtn = document.querySelector("[data-edit-project-btn]");
+    const index = editProjectBtn.getAttribute("data-index");
+    const projectId = document
+      .querySelector(".project-page")
+      .getAttribute("data-page-index");
+    editColorInput.addEventListener("change", (e) => {
+      return (editColorInput.value = e.target.value);
+    });
+
+    if (editNameInput.value === "") {
+      editNameInput.value = "Project has no name";
+    }
+
+    _project__WEBPACK_IMPORTED_MODULE_1__["default"].editCurrentProject(
+      projectId,
+      editNameInput.value,
+      editDescInput.value,
+      editColorInput.value
+    );
+
+    modal.classList.add("hidden");
+    modalForm.removeEventListener("submit", editProjectEvent);
+  };
+
   return {
     toggleSidebar,
     openNewProjectModal,
+    openEditProjectModal,
   };
 })();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (handlers);
@@ -1523,6 +1604,9 @@ const domElements = (() => {
     projectDeleteBtn.textContent = "Delete";
     projectDeleteBtn.setAttribute("data-delete-project-btn", "");
     projectDeleteBtn.setAttribute("data-index", index);
+    projectDeleteBtn.addEventListener("click", () =>
+      _project__WEBPACK_IMPORTED_MODULE_0__["default"].deleteCurrentProject(index)
+    );
 
     const toDoSection = createDiv("todos-section");
     const toDoSectionActions = createDiv("todos-section-actions");
@@ -1617,6 +1701,7 @@ const projects = (() => {
     currentProject.color = newColor;
 
     _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].renderAllProjectsPage();
+    _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].renderSingleProjectPage(currentProject, currentProject.id);
   };
 
   const deleteCurrentProject = (index) => {
