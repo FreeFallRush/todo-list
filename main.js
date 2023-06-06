@@ -891,6 +891,129 @@ textarea:focus {
   border: var(--dashed-border-yellow);
   border-radius: 8px;
 }
+
+.add-todo-btn:hover {
+  box-shadow: var(--inset-box-shadow);
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: var(--dashed-border-black);
+}
+
+.todos-container {
+  width: 100%;
+}
+
+.all-todos {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.todo-card {
+  width: 80%;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.todo-content {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 36px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border: var(--dashed-border-black);
+  background-color: var(--main-container-background-color);
+  box-shadow: var(--inset-box-shadow);
+}
+
+.todo-project-label {
+  height: auto;
+  text-align: center;
+  padding: 2px 5px;
+  font-size: 0.9rem;
+  word-break: break-all;
+  background: var(--header-gradient-background);
+  color: var(--secondary-color);
+}
+
+.todo-name-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-right: 4px;
+  border: var(--dashed-border-black);
+  border-radius: 8px;
+}
+
+.todo-name-container,
+.todo-duedate-container,
+.todo-priority-container,
+.todo-actions {
+  justify-content: center;
+}
+
+.todo-name {
+  word-break: break-all;
+  padding: 4px;
+  text-align: center;
+}
+
+.todo-actions {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.todo-actions i {
+  font-size: 26px;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: var(--main-box-shadow);
+  background-color: var(--main-container-background-color);
+}
+
+.todo-actions i:hover {
+  box-shadow: var(--inset-box-shadow);
+  color: var(--secondary-color);
+  text-shadow: var(--nav-menu-text-shadow);
+}
+
+i.fa-pen-to-square {
+  color: #b98cf5;
+  margin-right: 20px;
+}
+
+i.fa-trash {
+  color: #e8587c;
+}
+
+.todo-duedate {
+  color: #0016a5;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 0.9rem;
+  text-shadow: var(--logo-text-shadow);
+}
+
+.todo-priority-container {
+  margin: 8px;
+  border: var(--dashed-border-black);
+  border-radius: 8px;
+}
+
+.todo-priority {
+  font-size: 0.9rem;
+  padding: 8px;
+  color: var(--secondary-color);
+}
 `, ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
