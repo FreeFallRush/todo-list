@@ -357,7 +357,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `@font-face {
 :root {
   --primary-color: rgb(0, 0, 0);
   --secondary-color: rgb(244, 244, 171);
-  --gray-color: #aaa;
   --linear-background: linear-gradient(to top left, #973ab7, #009688, #4caf50);
   --dashed-border-black: 1px dashed #000;
   --dashed-border-yellow: 1px dashed rgb(244, 244, 171);
