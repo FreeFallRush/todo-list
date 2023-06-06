@@ -49,20 +49,18 @@ const handlers = (() => {
       "[data-new-project-description]"
     );
     const colorInput = document.querySelector("[data-project-color]");
-
-    if (nameInput.value === "") {
+    if (nameInput.value == -"") {
       nameInput.value = "Project Unnamed";
     }
 
+    const projectName = nameInput.value;
+    const projectDescription = descriptionInput.value;
+    const projectColor = colorInput.value;
+
     if (projectName !== "") {
-      projects.createNewProject(
-        nameInput.value,
-        descriptionInput.value,
-        colorInput.value
-      );
+      projects.createNewProject(projectName, projectDescription, projectColor);
       domElements.renderAllProjectsPage();
     }
-
     modalForm.removeEventListener("submit", addNewProjectEvent);
     modal.classList.add("hidden");
   };
