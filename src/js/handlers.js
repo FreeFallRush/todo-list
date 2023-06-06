@@ -24,6 +24,7 @@ const handlers = (() => {
     e.preventDefault();
     modalForm.removeEventListener("submit", addNewProjectEvent);
     modalForm.removeEventListener("submit", editProjectEvent);
+    modalForm.removeEventListener("submit", addNewToDoEvent);
 
     modal.classList.add("hidden");
   });
@@ -33,6 +34,7 @@ const handlers = (() => {
       e.preventDefault();
       modalForm.removeEventListener("submit", addNewProjectEvent);
       modalForm.removeEventListener("submit", editProjectEvent);
+      modalForm.removeEventListener("submit", addNewToDoEvent);
 
       modal.classList.add("hidden");
     }
@@ -97,7 +99,6 @@ const handlers = (() => {
     );
     const editColorInput = document.querySelector("[data-edit-project-color]");
     const editProjectBtn = document.querySelector("[data-edit-project-btn]");
-    const index = editProjectBtn.getAttribute("data-index");
     const projectId = document
       .querySelector(".project-page")
       .getAttribute("data-page-index");
@@ -120,10 +121,42 @@ const handlers = (() => {
     modalForm.removeEventListener("submit", editProjectEvent);
   };
 
+  //Add ToDo
+
+  const openNewToDoModal = () => {
+    domElements.createAddToDoModal();
+    modalForm.addEventListener("submit", addNewToDoEvent);
+    modal.classList.remove("hidden");
+  };
+
+  const addNewToDoEvent = (e) => {
+    e.preventDefault();
+
+    const projectId = document
+      .querySelector(".project-page")
+      .getAttribute("data-page-index");
+    const taskNameInput = document.querySelector("[data-new-todo-name]");
+    const dueDateInput = document.querySelector("[data-due-date-input]");
+    const selectPriorityInput = document.querySelector(
+      "[data-select-priority]"
+    );
+
+    todos.createNewToDo(
+      projectId,
+      taskNameInput.value,
+      dueDateInput.value,
+      selectPriorityInput.value
+    );
+
+    modal.classList.add("hidden");
+    modalForm.removeEventListener("submit", addNewToDoEvent);
+  };
+
   return {
     toggleSidebar,
     openNewProjectModal,
     openEditProjectModal,
+    openNewToDoModal,
   };
 })();
 export default handlers;
