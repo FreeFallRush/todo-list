@@ -68,9 +68,60 @@ const handlers = (() => {
     modal.classList.add("hidden");
   };
 
+  //Edit Project
+
+  const openEditProjectModal = (project) => {
+    domElements.createEditProjectModal();
+
+    const editNameInput = document.querySelector("[data-edit-project-name]");
+    const editDescInput = document.querySelector(
+      "[data-edit-project-description]"
+    );
+    const editColorInput = document.querySelector("[data-edit-project-color]");
+
+    editNameInput.value = project.name;
+    editDescInput.value = project.description;
+    editColorInput.value = project.color;
+
+    modalForm.addEventListener("submit", editProjectEvent);
+    modal.classList.remove("hidden");
+  };
+
+  const editProjectEvent = (e) => {
+    e.preventDefault();
+    const editNameInput = document.querySelector("[data-edit-project-name]");
+    const editDescInput = document.querySelector(
+      "[data-edit-project-description]"
+    );
+    const editColorInput = document.querySelector("[data-edit-project-color]");
+    const editProjectBtn = document.querySelector("[data-edit-project-btn]");
+    const index = editProjectBtn.getAttribute("data-index");
+    const projectId = document
+      .querySelector(".project-page")
+      .getAttribute("data-page-index");
+    editColorInput.addEventListener("change", (e) => {
+      return (editColorInput.value = e.target.value);
+    });
+
+    if (editNameInput.value === "") {
+      editNameInput.value = "Project has no name";
+    }
+
+    projects.editCurrentProject(
+      projectId,
+      editNameInput.value,
+      editDescInput.value,
+      editColorInput.value
+    );
+
+    modal.classList.add("hidden");
+    modalForm.removeEventListener("submit", editProjectEvent);
+  };
+
   return {
     toggleSidebar,
     openNewProjectModal,
+    openEditProjectModal,
   };
 })();
 export default handlers;
