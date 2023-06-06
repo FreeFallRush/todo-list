@@ -24,6 +24,9 @@ sidebarLinks.forEach((link) => {
       case "Upcoming":
         domElements.renderUpcomingPage();
         break;
+      case "Important":
+        domElements.renderImportantPage();
+        break;
     }
   });
 });
