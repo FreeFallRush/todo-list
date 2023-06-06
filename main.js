@@ -950,6 +950,7 @@ const handlers = (() => {
 
   closeModalBtn.addEventListener("click", (e) => {
     e.preventDefault();
+    modalForm.removeEventListener("submit", addNewProjectEvent);
 
     modal.classList.add("hidden");
   });
@@ -957,6 +958,7 @@ const handlers = (() => {
   window.addEventListener("click", (e) => {
     if (e.target === modal) {
       e.preventDefault();
+      modalForm.removeEventListener("submit", addNewProjectEvent);
 
       modal.classList.add("hidden");
     }
@@ -966,8 +968,34 @@ const handlers = (() => {
 
   const openNewProjectModal = () => {
     _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].createAddProjectModal();
-
+    modalForm.addEventListener("submit", addNewProjectEvent);
     modal.classList.remove("hidden");
+  };
+
+  const addNewProjectEvent = (e) => {
+    e.preventDefault();
+
+    const nameInput = document.querySelector("[data-new-project-name]");
+    const descriptionInput = document.querySelector(
+      "[data-new-project-description]"
+    );
+    const colorInput = document.querySelector("[data-project-color]");
+
+    if (nameInput.value === "") {
+      nameInput.value = "Project Unnamed";
+    }
+
+    if (projectName !== "") {
+      projects.createNewProject(
+        nameInput.value,
+        descriptionInput.value,
+        colorInput.value
+      );
+      _dom_elements__WEBPACK_IMPORTED_MODULE_0__["default"].renderAllProjectsPage();
+    }
+
+    modalForm.removeEventListener("submit", addNewProjectEvent);
+    modal.classList.add("hidden");
   };
 
   return {
