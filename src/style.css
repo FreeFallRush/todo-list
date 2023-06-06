@@ -25,7 +25,6 @@
 :root {
   --primary-color: rgb(0, 0, 0);
   --secondary-color: rgb(244, 244, 171);
-  --gray-color: #aaa;
   --linear-background: linear-gradient(to top left, #973ab7, #009688, #4caf50);
   --dashed-border-black: 1px dashed #000;
   --dashed-border-yellow: 1px dashed rgb(244, 244, 171);
@@ -237,4 +236,32 @@ nav.hide {
 
 .projects-add i {
   padding-left: 8px;
+}
+
+/* Main Container */
+
+#main-container {
+  position: absolute;
+  top: 70px;
+  left: 200px;
+  background-color: var(--main-container-background-color);
+  width: calc(100% - 200px);
+  height: 100%;
+  transition: ease-in 0.3s;
+}
+
+#main-container.expand {
+  width: 100%;
+  height: 100%;
+  left: 0;
+}
+
+#main-content {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background-color: var(--main-container-background-color);
 }

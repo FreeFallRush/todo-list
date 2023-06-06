@@ -570,6 +570,34 @@ nav.hide {
 .projects-add i {
   padding-left: 8px;
 }
+
+/* Main Container */
+
+#main-container {
+  position: absolute;
+  top: 70px;
+  left: 200px;
+  background-color: var(--main-container-background-color);
+  width: calc(100% - 200px);
+  height: 100%;
+  transition: ease-in 0.3s;
+}
+
+#main-container.expand {
+  width: 100%;
+  height: 100%;
+  left: 0;
+}
+
+#main-content {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background-color: var(--main-container-background-color);
+}
 `, ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
