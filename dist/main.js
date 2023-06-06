@@ -2023,6 +2023,23 @@ const domElements = (() => {
       pageTitle.textContent = `You have: ${allToDosToFilter.length} ToDos`;
     }
 
+    if (currentPage === "Today") {
+      _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList.forEach((project) => {
+        allToDosToFilter.push(...project.todos);
+      });
+      const filtered = allToDosToFilter.filter(
+        (todo) => todo.dueDate === (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(new Date(), "yyyy-MM-dd")
+      );
+      filtered.forEach((todo) => {
+        toDosNumb += 1;
+        const toDoCard = createToDoCard(todo);
+        toDosContainer.textContent = "";
+        allTodos.append(toDoCard);
+      });
+      pageTitle.textContent = `Today's ToDos: ${toDosNumb} ToDos`;
+      toDosContainer.append(allTodos);
+    }
+
     if (currentPage === `${pagePId}-Project`) {
       const currentProjectTodos = _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[pagePId].todos;
       currentProjectTodos.forEach((todo, index) => {
@@ -2141,6 +2158,19 @@ const domElements = (() => {
     renderToDos();
   };
 
+  const renderTodayPage = () => {
+    mainContainer.setAttribute("data-page", "Today");
+    const pageHeader = createDiv("page-header");
+    const pageTitle = createH2("page-title");
+    const toDosContainer = createDiv("todos-container");
+
+    mainContent.textContent = "";
+
+    pageHeader.append(pageTitle);
+    mainContent.append(pageHeader, toDosContainer);
+    renderToDos();
+  };
+
   return {
     createAddProjectModal,
     createEditProjectModal,
@@ -2150,6 +2180,7 @@ const domElements = (() => {
     renderSingleProjectPage,
     renderToDos,
     renderAllToDosPage,
+    renderTodayPage,
   };
 })();
 
