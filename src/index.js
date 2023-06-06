@@ -15,6 +15,9 @@ sidebarLinks.forEach((link) => {
       case "All Projects":
         domElements.renderAllProjectsPage();
         break;
+      case "All ToDos":
+        domElements.renderAllToDosPage();
+        break;
     }
   });
 });

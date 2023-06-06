@@ -5176,6 +5176,9 @@ sidebarLinks.forEach((link) => {
       case "All Projects":
         _js_dom_elements__WEBPACK_IMPORTED_MODULE_2__["default"].renderAllProjectsPage();
         break;
+      case "All ToDos":
+        _js_dom_elements__WEBPACK_IMPORTED_MODULE_2__["default"].renderAllToDosPage();
+        break;
     }
   });
 });
