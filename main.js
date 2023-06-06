@@ -2009,6 +2009,20 @@ const domElements = (() => {
     const allToDosToFilter = [];
     let toDosNumb = 0;
 
+    if (currentPage === "All ToDos") {
+      _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList.forEach((project) => {
+        allToDosToFilter.push(...project.todos);
+      });
+      allToDosToFilter.forEach((todo) => {
+        const toDoCard = createToDoCard(todo);
+        toDosContainer.textContent = "";
+        allTodos.append(toDoCard);
+      });
+
+      toDosContainer.append(allTodos);
+      pageTitle.textContent = `You have: ${allToDosToFilter.length} ToDos`;
+    }
+
     if (currentPage === `${pagePId}-Project`) {
       const currentProjectTodos = _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[pagePId].todos;
       currentProjectTodos.forEach((todo, index) => {
@@ -2113,6 +2127,20 @@ const domElements = (() => {
     renderToDos();
   };
 
+  const renderAllToDosPage = () => {
+    mainContainer.setAttribute("data-page", "All ToDos");
+    const pageHeader = createDiv("page-header");
+    const pageTitle = createH2("page-title");
+    const toDosContainer = createDiv("todos-container");
+
+    mainContent.textContent = "";
+
+    pageHeader.append(pageTitle);
+    mainContent.append(pageHeader, toDosContainer);
+
+    renderToDos();
+  };
+
   return {
     createAddProjectModal,
     createEditProjectModal,
@@ -2121,6 +2149,7 @@ const domElements = (() => {
     renderAllProjectsPage,
     renderSingleProjectPage,
     renderToDos,
+    renderAllToDosPage,
   };
 })();
 
