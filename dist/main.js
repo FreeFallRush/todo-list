@@ -915,7 +915,7 @@ textarea:focus {
 .todo-card {
   width: 80%;
   height: auto;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
 
 .todo-content {
