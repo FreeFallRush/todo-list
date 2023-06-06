@@ -5324,6 +5324,9 @@ sidebarLinks.forEach((link) => {
       case "Today":
         _js_dom_elements__WEBPACK_IMPORTED_MODULE_2__["default"].renderTodayPage();
         break;
+      case "Upcoming":
+        _js_dom_elements__WEBPACK_IMPORTED_MODULE_2__["default"].renderUpcomingPage();
+        break;
     }
   });
 });

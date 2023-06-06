@@ -21,6 +21,9 @@ sidebarLinks.forEach((link) => {
       case "Today":
         domElements.renderTodayPage();
         break;
+      case "Upcoming":
+        domElements.renderUpcomingPage();
+        break;
     }
   });
 });
