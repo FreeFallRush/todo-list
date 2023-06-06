@@ -1325,11 +1325,96 @@ const domElements = (() => {
     return projectCard;
   };
 
+  //Render Pages
+
+  const mainContent = document.querySelector("#main-content");
+  const mainContainer = document.querySelector("#main-container");
+
+  const renderAllProjectsPage = () => {
+    projects.saveProjects();
+    mainContainer.setAttribute("data-page", "All Projects");
+    mainContent.textContent = "";
+
+    const pageHeader = createDiv("page-header");
+    const pageTitle = createH2("page-title");
+    const projectsNumb = projects.todoList.length;
+    pageTitle.textContent = `You have: ${projectsNumb} projects`;
+    const cardsContainer = createDiv("cards-container");
+
+    projects.todoList.forEach((project, index) => {
+      project.id = index;
+
+      const projectCard = createProjectCard(project, index);
+      projectCard.addEventListener("click", () =>
+        renderSingleProjectPage(project, index)
+      );
+
+      cardsContainer.append(projectCard);
+    });
+    mainContent.textContent = "";
+    pageHeader.append(pageTitle);
+
+    mainContent.append(pageHeader, cardsContainer);
+  };
+
+  const renderSingleProjectPage = (project, index) => {
+    mainContainer.setAttribute("data-page", `${index}-Project`);
+    const pageDiv = createDiv("project-page");
+    pageDiv.setAttribute("data-page-index", index);
+    const pageHeaderDiv = createDiv("page-header");
+    const projectName = createH2("project-name-header");
+    projectName.textContent = project.name;
+    const projectDesc = createPara("project-description-header");
+
+    if (project.description === "") {
+      projectDesc.textContent = "Project has no description";
+    } else {
+      projectDesc.textContent = project.description;
+    }
+
+    const projectActions = createDiv("project-actions");
+    const projectEditBtn = createButton("project-edit");
+    projectEditBtn.textContent = "Edit";
+    projectEditBtn.setAttribute("data-edit-project-btn", "");
+    projectEditBtn.setAttribute("data-index", index);
+    projectEditBtn.addEventListener("click", () =>
+      handlers.openEditProjectModal(project)
+    );
+
+    const projectDeleteBtn = createButton("project-delete");
+    projectDeleteBtn.textContent = "Delete";
+    projectDeleteBtn.setAttribute("data-delete-project-btn", "");
+    projectDeleteBtn.setAttribute("data-index", index);
+
+    const toDoSection = createDiv("todos-section");
+    const toDoSectionActions = createDiv("todos-section-actions");
+    toDoSectionActions.setAttribute("data-color-project-id", index);
+    toDoSectionActions.style.backgroundColor = project.color;
+    const addToDoBtn = createButton("add-todo-btn");
+    addToDoBtn.textContent = `Add New ToDo`;
+    addToDoBtn.setAttribute("data-add-todo-btn", "");
+
+    const toDosContainer = createDiv("todos-container");
+    toDosContainer.setAttribute("data-todos-container", "");
+
+    mainContent.textContent = "";
+
+    projectActions.append(projectEditBtn, projectDeleteBtn);
+    pageHeaderDiv.append(projectName, projectDesc, projectActions);
+    pageDiv.append(pageHeaderDiv);
+
+    toDoSectionActions.append(addToDoBtn);
+    toDoSection.append(toDoSectionActions, toDosContainer);
+
+    mainContent.append(pageDiv, toDoSection);
+  };
+
   return {
     createAddProjectModal,
     createEditProjectModal,
     createAddToDoModal,
     createEditToDoModal,
+    renderSingleProjectPage,
   };
 })();
 
