@@ -379,6 +379,11 @@ const domElements = (() => {
     const deleteToDoBtn = createDiv("delete-todo-btn");
     deleteToDoBtn.innerHTML = `<i class="fa-solid fa-trash"></i>`;
     deleteToDoBtn.setAttribute("data-delete-todo-btn", todo.id);
+    deleteToDoBtn.addEventListener("click", () => {
+      const projectId = todo.projectId;
+      todos.deleteCurrentToDo(projectId, todo.id);
+      renderSingleProjectPage(projects.todoList[projectId], projectId);
+    });
 
     toDoNameDiv.append(toDoNamePara);
     dueDateDiv.append(toDoDueDatePara);
