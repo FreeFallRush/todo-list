@@ -510,6 +510,7 @@ const domElements = (() => {
     toDoSection.append(toDoSectionActions, toDosContainer);
 
     mainContent.append(pageDiv, toDoSection);
+    renderToDos();
   };
 
   return {

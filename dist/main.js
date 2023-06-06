@@ -1899,6 +1899,7 @@ const domElements = (() => {
     toDoSection.append(toDoSectionActions, toDosContainer);
 
     mainContent.append(pageDiv, toDoSection);
+    renderToDos();
   };
 
   return {
@@ -2016,6 +2017,7 @@ const todos = (() => {
   const createNewToDo = (projectId, title, dueDate, priority) => {
     const todo = new ToDo(projectId, title, dueDate, priority);
     _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos.push(todo);
+    domElements.renderToDos();
   };
 
   const editCurrentToDo = (
@@ -2028,10 +2030,12 @@ const todos = (() => {
     _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos[index].title = newTitle;
     _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos[index].dueDate = newDueDate;
     _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos[index].priority = newPriority;
+    domElements.renderToDos();
   };
 
   const deleteCurrentToDo = (projectId, index) => {
     _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId].todos.splice(index, 1);
+    domElements.renderToDos();
   };
 
   return {
