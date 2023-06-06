@@ -1597,6 +1597,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(60);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(61);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(62);
 
 
 
@@ -2040,6 +2041,23 @@ const domElements = (() => {
       toDosContainer.append(allTodos);
     }
 
+    if (currentPage === "Upcoming") {
+      const dates = getUpcomingDates();
+      _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList.forEach((project) => {
+        allToDosToFilter.push(...project.todos);
+      });
+      allToDosToFilter.forEach((todo) => {
+        if (dates.includes(todo.dueDate)) {
+          toDosNumb += 1;
+          const toDoCard = createToDoCard(todo);
+          toDosContainer.textContent = "";
+          allTodos.append(toDoCard);
+        }
+        pageTitle.textContent = `Today's ToDos: ${toDosNumb} ToDos`;
+      });
+      toDosContainer.append(allTodos);
+    }
+
     if (currentPage === `${pagePId}-Project`) {
       const currentProjectTodos = _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[pagePId].todos;
       currentProjectTodos.forEach((todo, index) => {
@@ -2171,6 +2189,30 @@ const domElements = (() => {
     renderToDos();
   };
 
+  const renderUpcomingPage = () => {
+    mainContainer.setAttribute("data-page", "Upcoming");
+    const pageHeader = createDiv("page-header");
+    const pageTitle = createH2("page-title");
+    const toDosContainer = createDiv("todos-container");
+
+    mainContent.textContent = "";
+
+    pageHeader.append(pageTitle);
+    mainContent.append(pageHeader, toDosContainer);
+    renderToDos();
+  };
+
+  const getUpcomingDates = () => {
+    const upcomingDates = (0,date_fns__WEBPACK_IMPORTED_MODULE_6__["default"])({
+      start: (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(new Date(), 1),
+      end: (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(new Date(), 7),
+    });
+    upcomingDates.forEach((date, index) =>
+      upcomingDates.splice(index, 1, (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(date, "yyyy-MM-dd"))
+    );
+    return upcomingDates;
+  };
+
   return {
     createAddProjectModal,
     createEditProjectModal,
@@ -2181,6 +2223,7 @@ const domElements = (() => {
     renderToDos,
     renderAllToDosPage,
     renderTodayPage,
+    renderUpcomingPage,
   };
 })();
 
@@ -5043,6 +5086,74 @@ function addDays(dirtyDate, dirtyAmount) {
   }
   date.setDate(date.getDate() + amount);
   return date;
+}
+
+/***/ }),
+/* 62 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ eachDayOfInterval)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(39);
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
+
+
+/**
+ * @name eachDayOfInterval
+ * @category Interval Helpers
+ * @summary Return the array of dates within the specified time interval.
+ *
+ * @description
+ * Return the array of dates within the specified time interval.
+ *
+ * @param {Interval} interval - the interval. See [Interval]{@link https://date-fns.org/docs/Interval}
+ * @param {Object} [options] - an object with options.
+ * @param {Number} [options.step=1] - the step to increment by. The value should be more than 1.
+ * @returns {Date[]} the array with starts of days from the day of the interval start to the day of the interval end
+ * @throws {TypeError} 1 argument required
+ * @throws {RangeError} `options.step` must be a number greater than 1
+ * @throws {RangeError} The start of an interval cannot be after its end
+ * @throws {RangeError} Date in interval cannot be `Invalid Date`
+ *
+ * @example
+ * // Each day between 6 October 2014 and 10 October 2014:
+ * const result = eachDayOfInterval({
+ *   start: new Date(2014, 9, 6),
+ *   end: new Date(2014, 9, 10)
+ * })
+ * //=> [
+ * //   Mon Oct 06 2014 00:00:00,
+ * //   Tue Oct 07 2014 00:00:00,
+ * //   Wed Oct 08 2014 00:00:00,
+ * //   Thu Oct 09 2014 00:00:00,
+ * //   Fri Oct 10 2014 00:00:00
+ * // ]
+ */
+function eachDayOfInterval(dirtyInterval, options) {
+  var _options$step;
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(1, arguments);
+  var interval = dirtyInterval || {};
+  var startDate = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(interval.start);
+  var endDate = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(interval.end);
+  var endTime = endDate.getTime();
+
+  // Throw an exception if start date is after end date or if any date is `Invalid Date`
+  if (!(startDate.getTime() <= endTime)) {
+    throw new RangeError('Invalid interval');
+  }
+  var dates = [];
+  var currentDate = startDate;
+  currentDate.setHours(0, 0, 0, 0);
+  var step = Number((_options$step = options === null || options === void 0 ? void 0 : options.step) !== null && _options$step !== void 0 ? _options$step : 1);
+  if (step < 1 || isNaN(step)) throw new RangeError('`options.step` must be a number greater than 1');
+  while (currentDate.getTime() <= endTime) {
+    dates.push((0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(currentDate));
+    currentDate.setDate(currentDate.getDate() + step);
+    currentDate.setHours(0, 0, 0, 0);
+  }
+  return dates;
 }
 
 /***/ })
