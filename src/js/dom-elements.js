@@ -398,6 +398,7 @@ const domElements = (() => {
     createEditProjectModal,
     createAddToDoModal,
     createEditToDoModal,
+    renderAllProjectsPage,
     renderSingleProjectPage,
   };
 })();
