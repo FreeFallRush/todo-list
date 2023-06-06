@@ -5391,6 +5391,9 @@ sidebarLinks.forEach((link) => {
       case "Important":
         _js_dom_elements__WEBPACK_IMPORTED_MODULE_2__["default"].renderImportantPage();
         break;
+      case "Expired":
+        _js_dom_elements__WEBPACK_IMPORTED_MODULE_2__["default"].renderExpiredPage();
+        break;
     }
   });
 });
