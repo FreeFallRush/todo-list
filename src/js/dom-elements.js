@@ -458,6 +458,22 @@ const domElements = (() => {
       toDosContainer.append(allTodos);
     }
 
+    if (currentPage === "Important") {
+      projects.todoList.forEach((project) => {
+        allToDosToFilter.push(...project.todos);
+      });
+      allToDosToFilter.forEach((todo) => {
+        if (todo.priority === "High Priority") {
+          toDosNumb += 1;
+          const toDoCard = createToDoCard(todo);
+          toDosContainer.textContent = "";
+          allTodos.append(toDoCard);
+        }
+        pageTitle.textContent = `Important ToDos: ${toDosNumb} ToDos`;
+      });
+      toDosContainer.append(allTodos);
+    }
+
     if (currentPage === `${pagePId}-Project`) {
       const currentProjectTodos = projects.todoList[pagePId].todos;
       currentProjectTodos.forEach((todo, index) => {
@@ -613,6 +629,19 @@ const domElements = (() => {
     return upcomingDates;
   };
 
+  const renderImportantPage = () => {
+    mainContainer.setAttribute("data-page", "Important");
+    const pageHeader = createDiv("page-header");
+    const pageTitle = createH2("page-title");
+    const toDosContainer = createDiv("todos-container");
+
+    mainContent.textContent = "";
+
+    pageHeader.append(pageTitle);
+    mainContent.append(pageHeader, toDosContainer);
+    renderToDos();
+  };
+
   return {
     createAddProjectModal,
     createEditProjectModal,
@@ -624,6 +653,7 @@ const domElements = (() => {
     renderAllToDosPage,
     renderTodayPage,
     renderUpcomingPage,
+    renderImportantPage,
   };
 })();
 
