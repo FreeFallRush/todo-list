@@ -1768,6 +1768,11 @@ const domElements = (() => {
     const deleteToDoBtn = createDiv("delete-todo-btn");
     deleteToDoBtn.innerHTML = `<i class="fa-solid fa-trash"></i>`;
     deleteToDoBtn.setAttribute("data-delete-todo-btn", todo.id);
+    deleteToDoBtn.addEventListener("click", () => {
+      const projectId = todo.projectId;
+      _todo__WEBPACK_IMPORTED_MODULE_1__["default"].deleteCurrentToDo(projectId, todo.id);
+      renderSingleProjectPage(_project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[projectId], projectId);
+    });
 
     toDoNameDiv.append(toDoNamePara);
     dueDateDiv.append(toDoDueDatePara);
@@ -1778,6 +1783,34 @@ const domElements = (() => {
     toDoCard.append(toDoCardContent);
 
     return toDoCard;
+  };
+
+  //RenderToDos
+
+  const renderToDos = () => {
+    const currentPage = document
+      .querySelector("#main-container")
+      .getAttribute("data-page");
+
+    const [pagePId, ...others] = currentPage.split("-");
+    const toDosContainer = document.querySelector(".todos-container");
+    const allTodos = createDiv("all-todos");
+    const pageTitle = document.querySelector(".page-title");
+    const allToDosToFilter = [];
+    let toDosNumb = 0;
+
+    if (currentPage === `${pagePId}-Project`) {
+      const currentProjectTodos = _project__WEBPACK_IMPORTED_MODULE_0__["default"].todoList[pagePId].todos;
+      currentProjectTodos.forEach((todo, index) => {
+        todo.id = index;
+        const toDoCard = createToDoCard(todo);
+        toDosContainer.textContent = "";
+        allTodos.append(toDoCard);
+      });
+      toDosContainer.append(allTodos);
+    }
+
+    _project__WEBPACK_IMPORTED_MODULE_0__["default"].saveProjects();
   };
 
   //Render Pages
@@ -1875,6 +1908,7 @@ const domElements = (() => {
     createEditToDoModal,
     renderAllProjectsPage,
     renderSingleProjectPage,
+    renderToDos,
   };
 })();
 

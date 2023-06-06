@@ -396,6 +396,34 @@ const domElements = (() => {
     return toDoCard;
   };
 
+  //RenderToDos
+
+  const renderToDos = () => {
+    const currentPage = document
+      .querySelector("#main-container")
+      .getAttribute("data-page");
+
+    const [pagePId, ...others] = currentPage.split("-");
+    const toDosContainer = document.querySelector(".todos-container");
+    const allTodos = createDiv("all-todos");
+    const pageTitle = document.querySelector(".page-title");
+    const allToDosToFilter = [];
+    let toDosNumb = 0;
+
+    if (currentPage === `${pagePId}-Project`) {
+      const currentProjectTodos = projects.todoList[pagePId].todos;
+      currentProjectTodos.forEach((todo, index) => {
+        todo.id = index;
+        const toDoCard = createToDoCard(todo);
+        toDosContainer.textContent = "";
+        allTodos.append(toDoCard);
+      });
+      toDosContainer.append(allTodos);
+    }
+
+    projects.saveProjects();
+  };
+
   //Render Pages
 
   const mainContent = document.querySelector("#main-content");
@@ -491,6 +519,7 @@ const domElements = (() => {
     createEditToDoModal,
     renderAllProjectsPage,
     renderSingleProjectPage,
+    renderToDos,
   };
 })();
 
