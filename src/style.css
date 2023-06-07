@@ -762,6 +762,14 @@ i.fa-trash {
     border-bottom: var(--dashed-border-black);
     padding: 3px;
   }
+
+  input[type="text"],
+  input[type="date"],
+  #todo-priority-select {
+    width: 80%;
+    padding: 8px;
+  }
+
   .todo-actions {
     display: flex;
     padding-top: 8px;
